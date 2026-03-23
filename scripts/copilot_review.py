@@ -49,7 +49,8 @@ def _review(df: pd.DataFrame) -> pd.DataFrame:
 
     # 1. Missing USD values
     for i, row in df.iterrows():
-        if row.get("usd_value") in (None, "", "nan") or pd.isna(row.get("usd_value", float("nan"))):
+        val = row.get("usd_value")
+        if val is None or val == "" or pd.isna(val):
             flags[i].append("missing_usd_value")
 
     # 2. Large transactions
